@@ -1,7 +1,6 @@
 class ProjectCard extends HTMLElement {
     constructor() {
       super();
-  
       const shadow = this.attachShadow({ mode: 'open' });
   
       const heading = document.createElement('h2');
@@ -9,18 +8,12 @@ class ProjectCard extends HTMLElement {
       const description = document.createElement('p');
       const readMoreLink = document.createElement('a');
   
-      const name = this.getAttribute('name');
-      const imgSrc = this.getAttribute('img-src');
-      const imgAlt = this.getAttribute('img-alt');
-      const projectDescription = this.getAttribute('description');
-      const readMore = this.getAttribute('readMore');
-  
-      heading.textContent = name;
-      image.src = imgSrc;
-      image.alt = imgAlt;
-      description.textContent = projectDescription;
+      heading.textContent = this.getAttribute('name');
+      image.src = this.getAttribute('img-src');
+      image.alt = this.getAttribute('img-alt');
+      description.textContent = this.getAttribute('description');
       readMoreLink.textContent = 'Read More';
-      readMoreLink.href = readMore; // Replace '#' with the actual link of the project
+      readMoreLink.href = this.getAttribute('readMore'); 
 
   
       shadow.innerHTML = `
