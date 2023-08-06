@@ -1,6 +1,7 @@
 class ProjectCard extends HTMLElement {
     constructor() {
       super();
+  
       const shadow = this.attachShadow({ mode: 'open' });
   
       const heading = document.createElement('h2');
@@ -8,12 +9,18 @@ class ProjectCard extends HTMLElement {
       const description = document.createElement('p');
       const readMoreLink = document.createElement('a');
   
-      heading.textContent = this.getAttribute('name');
-      image.src = this.getAttribute('img-src');
-      image.alt = this.getAttribute('img-alt');
-      description.textContent = this.getAttribute('description');
+      const name = this.getAttribute('name');
+      const imgSrc = this.getAttribute('img-src');
+      const imgAlt = this.getAttribute('img-alt');
+      const projectDescription = this.getAttribute('description');
+      const readMore = this.getAttribute('readMore');
+  
+      heading.textContent = name;
+      image.src = imgSrc;
+      image.alt = imgAlt;
+      description.textContent = projectDescription;
       readMoreLink.textContent = 'Read More';
-      readMoreLink.href = this.getAttribute('readMore'); 
+      readMoreLink.href = readMore; // Replace '#' with the actual link of the project
 
   
       shadow.innerHTML = `
@@ -85,7 +92,7 @@ loadLocalButton.addEventListener('click', () => {
 //-----------------------------------------------------------------------------
 
 loadRemoteButton.addEventListener('click', () => {
-    const url = "https://api.jsonbin.io/v3/qs/64cedba6b89b1e2299cc0246";//json url
+    const url = "https://api.jsonbin.io/v3/qs/64cee6b99d312622a38c9162";//json url
 
     fetch(url)
         .then(response => {
@@ -108,3 +115,13 @@ loadRemoteButton.addEventListener('click', () => {
 
 });
 
+
+//-----------------------------------------------------------------------------
+
+document.getElementById("updateForm").addEventListener("submit", function(event) {
+    const dataName = document.getElementById("dataName").value;
+    const updatedContent = document.getElementById("updatedContent").value;
+
+    localStorage.setItem(dataName, updatedContent);
+
+});
